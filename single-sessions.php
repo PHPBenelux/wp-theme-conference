@@ -54,6 +54,17 @@ get_header(); ?>
                             get_the_title()
                         ) );
 
+                        $speakers = get_field('speakers');
+                        $start = get_field('start');
+                        $end = get_field('end');
+                        if ($speakers) { ?>
+                            <span class="meta-title"><?php _e('By:', 'speaker'); ?></span>
+                            <?php foreach ($speakers as $speaker) { ?>
+                                <a href="<?php echo get_permalink($speaker->ID); ?>"><?php echo get_the_title($speaker->ID); ?></a>
+                                <?php
+                            }
+                        }
+
                         wp_link_pages( array(
                             'before'      => '<div class="page-links">' . __( 'Pages:', 'twentyseventeen' ),
                             'after'       => '</div>',

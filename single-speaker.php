@@ -54,7 +54,7 @@ get_header(); ?>
                                 $sessionList = "<span class=\"meta-title\">"._e('Sessions:', 'session')."</span>";
                                 $sessionList.= "<ul>";
                                 foreach ($sessions as $session) {
-                                    $sessionList.= "<li><a href=\"".get_permalink($session->ID)."\">".get_field('session_type', $session->ID).": ".get_the_title($session->ID)."</a></li>";
+                                    $sessionList.= "<li><a href=\"".get_permalink($session->ID)."\">".ucfirst(get_field('session_type', $session->ID)).": ".get_the_title($session->ID)."</a></li>";
                                 }
                                 $sessionList.= "</ul>";
                             }
