@@ -44,7 +44,7 @@ get_header(); ?>
                         if ($speakers) { ?>
                             <span class="meta-title"><?php _e('By:', 'speaker'); ?></span>
                             <?php foreach ($speakers as $speaker) { ?>
-                                <a href="<?php echo get_permalink($speaker->ID); ?>"><?php echo get_the_title($speaker->ID); ?></a>
+                                <a href="<?php echo get_permalink(); ?>"><?php echo get_the_title($speaker->ID); ?></a>
                                 <?php
                             }
                         }
