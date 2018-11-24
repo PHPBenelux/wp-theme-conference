@@ -38,7 +38,7 @@ get_header(); ?>
                             ?>
                         </header><!-- .entry-header -->
 
-                        <?php if ( '' !== get_the_post_thumbnail()) : ?>
+                        <?php if ( '' !== get_the_post_thumbnail() && ! is_single() ) : ?>
                             <div class="post-thumbnail">
                                 <a href="<?php the_permalink(); ?>">
                                     <?php the_post_thumbnail( 'twentyseventeen-featured-image' ); ?>
