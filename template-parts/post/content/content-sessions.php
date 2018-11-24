@@ -13,7 +13,7 @@
                 <?php twentyseventeen_edit_link(); ?>
             </div><!-- .entry-meta -->
         <?php endif; ?>
-
+        <?php echo ucfirst(get_field('session_type')); ?>:
         <?php if ( is_front_page() && ! is_home() ) {
 
             // The excerpt is being displayed within a front page section, so it's a lower hierarchy than h2.
