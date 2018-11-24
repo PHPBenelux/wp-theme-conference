@@ -19,16 +19,48 @@ get_header(); ?>
                 if ( have_posts() ) : ?>
                     <?php
                     /* Start the Loop */
-                    while ( have_posts() ) : the_post();
+                    while ( have_posts() ) : the_post(); ?>
 
-                        /*
-                         * Include the Post-Format-specific template for the content.
-                         * If you want to override this in a child theme, then include a file
-                         * called content-___.php (where ___ is the Post Format name) and that will be used instead.
-                         */
-                        get_template_part( 'template-parts/post/content', 'sessions' );
+                        <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-                    endwhile;
+                            <header class="entry-header">
+                                <?php if ( 'post' === get_post_type() ) : ?>
+                                    <div class="entry-meta">
+                                        <?php
+                                        echo twentyseventeen_time_link();
+                                        twentyseventeen_edit_link();
+                                        ?>
+                                    </div><!-- .entry-meta -->
+                                <?php elseif ( 'page' === get_post_type() && get_edit_post_link() ) : ?>
+                                    <div class="entry-meta">
+                                        <?php twentyseventeen_edit_link(); ?>
+                                    </div><!-- .entry-meta -->
+                                <?php endif; ?>
+                                <?php echo ucfirst(get_field('session_type')); ?>: <?php the_title( sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
+                            </header><!-- .entry-header -->
+
+                            <div class="entry-summary">
+                                <?php
+                                $speakers = get_field('speakers');
+                                if ($speakers) {
+                                    foreach($speakers as $speaker) {
+                                        if (has_post_thumbnail($speaker)) {
+                                            ?>
+                                            <a href="<?php get_permalink($speaker->ID) ?>" class="speaker-img" rel="bookmark" title="<?php get_the_title($speaker->ID); ?>"><?php get_the_post_thumbnail($speaker->ID, 'medium-thumb'); ?></a>
+                                            <?php
+                                        }
+                                    }
+                                    ?>
+                                <?php } elseif (  (function_exists('has_post_thumbnail')) && (has_post_thumbnail())  ) { ?>
+                                    <a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title(); ?>"><?php the_post_thumbnail('medium-thumb'); ?></a>
+                                <?php } ?>
+
+                                <?php the_excerpt(); ?>
+                            </div><!-- .entry-summary -->
+
+                        </article><!-- #post-## -->
+
+                    <?php endwhile;
 
                     the_posts_pagination( array(
                         'prev_text' => twentyseventeen_get_svg( array( 'icon' => 'arrow-left' ) ) . '<span class="screen-reader-text">' . __( 'Previous page', 'twentyseventeen' ) . '</span>',
