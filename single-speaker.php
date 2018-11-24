@@ -47,22 +47,25 @@ get_header(); ?>
                         <?php endif; ?>
 
                         <div class="entry-content">
+
                             <?php
+                            $sessions = get_field('session');
+                            if ($sessions) {
+                                $sessionList = "<span class=\"meta-title\">"._e('Sessions:', 'session')."</span>";
+                                $sessionList.= "<ul>";
+                                foreach ($sessions as $session) {
+                                    $sessionList.= "<li><a href=\"".get_permalink($session->ID)."\">".get_field('session_type', $session->ID).": ".get_the_title($session->ID)."</a></li>";
+                                }
+                                $sessionList.= "</ul>";
+                            }
+
                             /* translators: %s: Name of current post */
                             the_content( sprintf(
                                 __( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'twentyseventeen' ),
                                 get_the_title()
                             ) );
 
-                            $sessions = get_field('session');
-                            if ($sessions): ?>
-                                <span class="meta-title"><?php _e('Sessions:', 'session'); ?></span>
-                                <ul>
-                                    <?php foreach ($sessions as $session): ?>
-                                        <li><a href="<?php echo get_permalink($session->ID); ?>"><?php echo get_the_title($session->ID); ?></a></li>
-                                    <?php endforeach; ?>
-                                </ul>
-                            <?php endif;
+                            echo $sessionList;
 
                             wp_link_pages( array(
                                 'before'      => '<div class="page-links">' . __( 'Pages:', 'twentyseventeen' ),
