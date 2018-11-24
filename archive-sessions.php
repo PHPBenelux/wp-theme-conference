@@ -36,7 +36,8 @@ get_header(); ?>
                                         <?php twentyseventeen_edit_link(); ?>
                                     </div><!-- .entry-meta -->
                                 <?php endif; ?>
-                                <?php echo ucfirst(get_field('session_type')); ?>: <?php the_title( sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
+                                <?php the_title( sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
+                                <h3><?php echo ucfirst(get_field('session_type')); ?></h3>
                             </header><!-- .entry-header -->
 
                             <div class="entry-summary">
