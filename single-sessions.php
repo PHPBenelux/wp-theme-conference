@@ -35,6 +35,17 @@ get_header(); ?>
                         } else {
                             the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
                         }
+
+                        $speakers = get_field('speakers');
+                        $start = get_field('start');
+                        $end = get_field('end');
+                        if ($speakers) { ?>
+                            <span class="meta-title"><?php _e('By:', 'speaker'); ?></span>
+                            <?php foreach ($speakers as $speaker) { ?>
+                                <a href="<?php echo get_permalink($speaker->ID); ?>"><?php echo get_the_title($speaker->ID); ?></a>
+                                <?php
+                            }
+                        }
                         ?>
                     </header><!-- .entry-header -->
 
@@ -53,17 +64,6 @@ get_header(); ?>
                             __( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'twentyseventeen' ),
                             get_the_title()
                         ) );
-
-                        $speakers = get_field('speakers');
-                        $start = get_field('start');
-                        $end = get_field('end');
-                        if ($speakers) { ?>
-                            <span class="meta-title"><?php _e('By:', 'speaker'); ?></span>
-                            <?php foreach ($speakers as $speaker) { ?>
-                                <a href="<?php echo get_permalink($speaker->ID); ?>"><?php echo get_the_title($speaker->ID); ?></a>
-                                <?php
-                            }
-                        }
 
                         wp_link_pages( array(
                             'before'      => '<div class="page-links">' . __( 'Pages:', 'twentyseventeen' ),
