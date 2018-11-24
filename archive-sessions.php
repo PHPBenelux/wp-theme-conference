@@ -37,7 +37,7 @@ get_header(); ?>
                                     </div><!-- .entry-meta -->
                                 <?php endif; ?>
                                 <?php the_title( sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
-                                <h3><?php echo ucfirst(get_field('session_type')); ?></h3>
+                                <h5><?php echo ucfirst(get_field('session_type')); ?></h5>
                             </header><!-- .entry-header -->
 
                             <div class="entry-summary">
