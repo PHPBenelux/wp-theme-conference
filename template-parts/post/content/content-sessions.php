@@ -24,6 +24,21 @@
     </header><!-- .entry-header -->
 
     <div class="entry-summary">
+        <?php
+        $speakers = get_field('speakers');
+        if ($speakers) {
+            foreach($speakers as $speaker) {
+                if (has_post_thumbnail($speaker)) {
+                    ?>
+                    <a href="<?php get_permalink($speaker->ID) ?>" class="speaker-img" rel="bookmark" title="<?php get_the_title($speaker->ID); ?>"><?php get_the_post_thumbnail($speaker->ID, 'medium-thumb'); ?></a>
+                    <?php
+                }
+            }
+            ?>
+        <?php } elseif (  (function_exists('has_post_thumbnail')) && (has_post_thumbnail())  ) { ?>
+            <a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title(); ?>"><?php the_post_thumbnail('medium-thumb'); ?></a>
+        <?php } ?>
+
         <?php the_excerpt(); ?>
     </div><!-- .entry-summary -->
 
