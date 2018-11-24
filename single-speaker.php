@@ -54,6 +54,16 @@ get_header(); ?>
                                 get_the_title()
                             ) );
 
+                            $sessions = get_field('session');
+                            if ($sessions): ?>
+                                <span class="meta-title"><?php _e('Sessions:', 'session'); ?></span>
+                                <ul>
+                                    <?php foreach ($sessions as $session): ?>
+                                        <li><a href="<?php echo get_permalink($session->ID); ?>"><?php echo get_the_title($session->ID); ?></a></li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            <?php endif;
+
                             wp_link_pages( array(
                                 'before'      => '<div class="page-links">' . __( 'Pages:', 'twentyseventeen' ),
                                 'after'       => '</div>',
