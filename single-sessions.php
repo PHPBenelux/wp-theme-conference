@@ -29,13 +29,15 @@ get_header(); ?>
                         };
 
                         if ( is_single() ) {
-                            the_title( sprintf('<h1 class="entry-title">%s :', get_field('session_type')), '</h1>' );
+                            the_title( '<h1 class="entry-title">', '</h1>' );
                         } elseif ( is_front_page() && is_home() ) {
                             the_title( '<h3 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h3>' );
                         } else {
                             the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
                         }
-
+                        ?>
+                        <h5><?php echo ucfirst(get_field('session_type')); ?></h5>
+                        <?php
                         $speakers = get_field('speakers');
                         $start = get_field('start');
                         $end = get_field('end');
