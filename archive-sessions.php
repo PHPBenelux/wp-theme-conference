@@ -47,7 +47,10 @@ get_header(); ?>
                                     foreach($speakers as $speaker) {
                                         if (has_post_thumbnail($speaker)) {
                                             ?>
-                                            <a href="<?php get_permalink($speaker->ID) ?>" class="speaker-img" rel="bookmark" title="<?php get_the_title($speaker->ID); ?>"><?php get_the_post_thumbnail($speaker->ID, 'medium-thumb'); ?></a>
+                                            <a href="<?php echo get_permalink($speaker->ID) ?>" class="speaker-img" rel="bookmark" title="<?php echo get_the_title($speaker->ID); ?>"><?php echo get_the_post_thumbnail($speaker->ID, 'medium-thumb'); ?></a>
+                                            <?php
+                                        } else { ?>
+                                            <p><a href="<?php echo get_permalink($speaker->ID) ?>" class="speaker-img" rel="bookmark" title="<?php echo get_the_title($speaker->ID); ?>"><?php echo get_the_title($speaker->ID); ?></a></p>
                                             <?php
                                         }
                                     }
