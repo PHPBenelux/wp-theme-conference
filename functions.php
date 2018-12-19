@@ -25,4 +25,35 @@ function phpbnl_change_sort_order($query){
 
     return $query;
 };
+
+/**
+ * @param $query
+ * @return WP_Query
+ */
+function phpbnl_filter_sessions($query){
+    if (!isset($_GET['sessions_filter'])) {
+        return $query;
+    }
+
+    if ($_GET['sessions_filter'] === 'talks') {
+        $filter = 'talk';
+    } else {
+        $filter = 'tutorial';
+    }
+
+    if(is_archive() && isset($query->query_vars['post_type']) && $query->query_vars['post_type'] == 'sessions'):
+        $query->set('meta_query', [
+            'relation' => 'AND',
+            [
+                'key' => 'session_type',
+                'value' => $filter,
+                'compare' => '=',
+            ]
+        ]);
+    endif;
+
+    return $query;
+}
+
 add_action( 'pre_get_posts', 'phpbnl_change_sort_order');
+add_action( 'pre_get_posts', 'phpbnl_filter_sessions');
