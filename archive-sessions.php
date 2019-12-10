@@ -37,7 +37,20 @@ get_header(); ?>
                                     </div><!-- .entry-meta -->
                                 <?php endif; ?>
                                 <?php the_title( sprintf( '<h2 class="entry-title"><a href="%s" rel="bookmark">', esc_url( get_permalink() ) ), '</a></h2>' ); ?>
-                                <h5><?php echo ucfirst(get_field('session_type')); ?></h5>
+                                <h5>
+                                    <?php echo ucfirst(get_field('session_type')); ?> by
+                                    <?php
+                                    $speakers = get_field('speakers');
+                                    $i = 0;
+                                    if ($speakers) {
+                                        foreach($speakers as $speaker) {
+                                            echo $i !== 0 ?  ' &amp ' : '';
+                                            echo get_the_title($speaker->ID);
+                                            $i++;
+                                        }
+                                    }
+                                    ?>
+                                </h5>
                             </header><!-- .entry-header -->
 
                             <div class="entry-summary">
