@@ -66,7 +66,9 @@ get_header(); ?>
                             __( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'twentyseventeen' ),
                             get_the_title()
                         ) );
-
+                        ?>
+                        <p><a href="https://shop.phpbenelux.eu" title="PHPBenelux Conference 2020 Ticket shop" class="btn btn-info btn-block">Get your tickets now!</a></p>
+                        <?php
                         wp_link_pages( array(
                             'before'      => '<div class="page-links">' . __( 'Pages:', 'twentyseventeen' ),
                             'after'       => '</div>',
